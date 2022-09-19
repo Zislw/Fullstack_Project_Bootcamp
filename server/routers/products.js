@@ -6,7 +6,7 @@ const {verifyToken}=require('../middleware/auth')
 
  //router.use(verifyToken(["user","admin"]))
 //  ,verifyToken(["user","admin"])
- router.get('/', async (req, res) => {
+ router.get('/',verifyToken(["user"]), async (req, res) => {
     let data = await products.getAllProducts()
     return res.json(data)
 })
@@ -17,7 +17,7 @@ router.get('/:id',verifyToken(["user","admin"]), async (req, res) => {
     return res.json(data)
 })
 
- router.use(verifyToken("admin"))
+// router.use(verifyToken("admin"))
 
 router.post('/', async (req, res) => {
     let body = req.body

@@ -33,8 +33,6 @@ const createUser = (user) => {
             .then(hashedPassword => {
                 role_bl.getRoleByName("user")
                     .then(data => {
-                        console.log("Aaaaaaaaaaaaaa");
-                        console.log(data);
                         let u = new user_model(
                             { ...user, password: hashedPassword, role: data }
                         )
@@ -83,7 +81,6 @@ const login = (email, password) => {
             .then(user => {
                 bcrypt.compare(password, user.password)
                     .then(passwordCheck => {
-                        console.log(password+' '+user.password);
                         if (!passwordCheck) {
                             resolve({ massage: "Password doesn't found", error })
                         }
